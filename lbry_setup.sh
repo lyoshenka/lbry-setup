@@ -37,7 +37,7 @@ UpdateSource()
         git init
         git remote add origin "${GIT_URL_ROOT}lbry-setup.git"
         git fetch --all
-        git checkout testing
+        git checkout master
 		return 0 
 	else
 		#http://stackoverflow.com/questions/3258243/git-check-if-pull-needed
