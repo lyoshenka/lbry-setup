@@ -14,7 +14,7 @@ PACKAGES="git libgmp3-dev build-essential python2.7 python2.7-dev python-pip"
 #install/update requirements
 if hash apt-get 2>/dev/null; then
 	printf "Installing $PACKAGES\n\n"
-	sudo apt-get install -y $PACKAGES || echo "\n\nFailed to install necessary packages. Make sure your system is up to date and then try again." && exit
+	sudo apt-get install -y $PACKAGES || ( echo "\n\nFailed to install necessary packages. Make sure your system is up to date and then try again." && exit )
 else
 	printf "Running on a system without apt-get. Install requires the following packages or equivalents: $PACKAGES\n\nPull requests encouraged if you have an install for your system!\n\n"
     exit
@@ -113,6 +113,6 @@ if [ -d dist ]; then
     fi
 fi
 SETUPFAILEDMESSAGE="Failed to install lbry. Make sure your system is up to date and try again.\n"
-python2.7 setup.py build bdist_egg || echo "$SETUPFAILEDMESSAGE" && cd .. && exit
-sudo python2.7 setup.py install || echo "$SETUPFAILEDMESSAGE" && cd .. && exit
+python2.7 setup.py build bdist_egg || ( echo "$SETUPFAILEDMESSAGE" && cd .. && exit )
+sudo python2.7 setup.py install || ( echo "$SETUPFAILEDMESSAGE" && cd .. && exit )
 cd ..
