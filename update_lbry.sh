@@ -20,17 +20,6 @@ else
     exit
 fi
 
-#create config file
-if [ ! -f $CONF_FILE ]; then
-	echo "Adding lbry config in $CONF_DIR"
-	mkdir -p $CONF_DIR
-	echo "rpcuser=lbryrpc" > $CONF_FILE
-	echo -n "rpcpassword=" >> $CONF_FILE
-	tr -dc A-Za-z0-9 < /dev/urandom | head -c ${1:-12} | xargs >> $CONF_FILE 
-else
-	echo "Config $CONF_FILE already exists"
-fi
-
 #Clone/pull repo and return true/false whether or not anything changed
 #$1 : repo name
 UpdateSource() 
@@ -69,7 +58,7 @@ UPDATELBRYCRD=0
 
 if [ -e bin/lbrycrd.tar.gz ]; then
     LBRYCRDHASHSUM=`md5sum bin/lbrycrd.tar.gz | awk '{print $1}'`
-    if [ ! "$LBRYCRDHASHSUM" = "5d876e2e2713c1f063ddc2ee46ad59f6" ] && [ ! "$LBRYCRDHASHSUM" = "79508c039a28aff329ccb49dd3d41691" ]; then
+    if [ ! "$LBRYCRDHASHSUM" = "046463be793a567671df691a2d4cac2f" ] && [ ! "$LBRYCRDHASHSUM" = "0cf55341bbd8594468af5792811c0977" ]; then
         UPDATELBRYCRD=1
     fi
 else
@@ -84,6 +73,19 @@ if [ $UPDATELBRYCRD = 1 ]; then
         wget https://github.com/lbryio/lbrycrd/releases/download/v0.1-alpha/lbrycrd_32.tar.gz -O lbrycrd.tar.gz
     fi
     tar xf lbrycrd.tar.gz
+    #create config file
+    if [ ! -d $CONF_DIR ]; then
+	    echo "Setting up lbrycrd data in in $CONF_DIR"
+	    mkdir -p $CONF_DIR
+	    echo "rpcuser=lbryrpc" > $CONF_FILE
+	    echo -n "rpcpassword=" >> $CONF_FILE
+	    tr -dc A-Za-z0-9 < /dev/urandom | head -c ${1:-12} | xargs >> $CONF_FILE
+        mv lbrycrd/lbrycrddata/* $CONF_DIR/
+        rm -rf lbrycrd/lbrycrddata
+    else
+	    echo "$CONF_DIR already exists"
+    fi
+
     mv lbrycrd/* .
     rm -rf lbrycrd
     cd ..
