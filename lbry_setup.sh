@@ -18,7 +18,10 @@ PACKAGES="git"
 #install/update requirements
 if hash apt-get 2>/dev/null; then
 	printf "Installing $PACKAGES\n\n"
-	sudo apt-get install -y $PACKAGES || ( echo "\n\nFailed to install necessary packages. Make sure your system is up to date, then try again." && exit )
+    if ! sudo apt-get install -y $PACKAGES; then 
+        echo $'\n\nFailed to install necessary packages. Make sure your system is up to date, then try again.'
+        exit
+    fi
 else
 	echo "Running on a system without apt-get.
 Install requires the following packages or equivalents: $PACKAGES
