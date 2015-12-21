@@ -71,9 +71,9 @@ fi
 if [ $UPDATELBRYCRD = 1 ]; then
     cd bin
     if [ `getconf LONG_BIT` = "64" ]; then
-        wget --quiet https://github.com/lbryio/lbrycrd/releases/download/v0.1-alpha/lbrycrd_64.tar.gz -O lbrycrd.tar.gz
+        wget --progress=bar https://github.com/lbryio/lbrycrd/releases/download/v0.1-alpha/lbrycrd_64.tar.gz -O lbrycrd.tar.gz
     else
-        wget --quiet https://github.com/lbryio/lbrycrd/releases/download/v0.1-alpha/lbrycrd_32.tar.gz -O lbrycrd.tar.gz
+        wget --progress=bar https://github.com/lbryio/lbrycrd/releases/download/v0.1-alpha/lbrycrd_32.tar.gz -O lbrycrd.tar.gz
     fi
     tar xf lbrycrd.tar.gz
     #create config file
