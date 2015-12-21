@@ -14,7 +14,10 @@ PACKAGES="git libgmp3-dev build-essential python2.7 python2.7-dev python-pip"
 #install/update requirements
 if hash apt-get 2>/dev/null; then
 	printf "Installing $PACKAGES\n\n"
-	sudo apt-get install -y $PACKAGES || ( echo "\n\nFailed to install necessary packages. Make sure your system is up to date and then try again." && exit )
+	if ! sudo apt-get install -y $PACKAGES; then
+        echo $'\n\nFailed to install necessary packages. Make sure your system is up to date and then try again.'
+        exit
+    fi
 else
 	printf "Running on a system without apt-get. Install requires the following packages or equivalents: $PACKAGES\n\nPull requests encouraged if you have an install for your system!\n\n"
     exit
@@ -104,9 +107,9 @@ fi
 #setup lbry-console
 printf "\n\nInstalling/updating lbry-console\n";
 if UpdateSource lbry || [ ! -d $ROOT/lbry/dist ]; then
-	echo "Updating lbry-console\n"
+	echo $'Updating lbry-console\n'
 else
-    echo "lbry already up to date, rebuilding anyway\n"
+    echo $'lbry already up to date, rebuilding anyway\n'
 fi
 cd lbry
 if [ -d dist ]; then
@@ -115,6 +118,14 @@ if [ -d dist ]; then
     fi
 fi
 SETUPFAILEDMESSAGE="Failed to install lbry. Make sure your system is up to date and try again.\n"
-python2.7 setup.py build bdist_egg || ( echo "$SETUPFAILEDMESSAGE" && cd .. && exit )
-sudo python2.7 setup.py install || ( echo "$SETUPFAILEDMESSAGE" && cd .. && exit )
+if ! python2.7 setup.py build bdist_egg; then
+    echo "$SETUPFAILEDMESSAGE"
+    cd ..
+    exit
+fi
+if ! sudo python2.7 setup.py install; then
+    echo "$SETUPFAILEDMESSAGE"
+    cd ..
+    exit
+fi
 cd ..
