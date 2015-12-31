@@ -16,7 +16,7 @@ Run the first script
 
         ./lbry_osx_setup_1.sh
 
-If you don't have xcode command line tools installed, a prompt will appear. Once it's done the you be prompted to hit 'enter' and to enter your password when requested.
+If you don't have xcode command line tools installed, a prompt will appear. Once it's done you'll be prompted to hit 'enter' and to enter your password when requested.
 
 Once the first script is done, complete the installation with
 
