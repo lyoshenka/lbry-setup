@@ -1,3 +1,32 @@
+Mac OS X Installer Scripts
+====================================
+An alternative to building lbry yourself, binaries only work on OS X El Capitan
+
+Clone this respository by opening a terminal and running
+
+        git clone https://github.com/lbryio/lbry-setup.git
+
+Make the scripts executable
+
+        cd lbry-setup
+        chmod +x lbry_osx_setup_1.sh
+        chmod +x lbry_osx_setup_2.sh
+
+Run the first script
+
+        ./lbry_osx_setup_1.sh
+
+If you don't have xcode command line tools installed, a prompt will appear. Once it's done the you be prompted to hit 'enter' and to enter your password when requested.
+
+Once the first script is done, complete the installation with
+
+        sudo ./lbry_osx_setup_2.sh
+        
+Once this completes you can start the gui by double clicking /Applications/LBRY.app, or start the lbrynet console with
+
+        sudo lbrynet-console
+
+
 Mac OS X Build Instructions and Notes
 ====================================
 This guide will show you how to build lbry for OSX.
