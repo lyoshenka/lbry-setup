@@ -1,12 +1,12 @@
 Mac OS X Installer Scripts
 ====================================
-An alternative to building lbry yourself, binaries only work on OS X El Capitan
+An alternative to building lbry yourself, binaries only work on OS X El Capitan. A video of what the installation should look like is here: https://www.youtube.com/watch?v=2SNUU3GWOJQ
 
 Clone this respository by opening a terminal and running
 
         git clone https://github.com/lbryio/lbry-setup.git
 
-If you don't have xcode command line tools installed, a prompt to do so will appear the first time you run 'git'. 
+If you don't have xcode command line tools installed, a prompt to do so will appear the first time you run 'git'. If you were prompted and had to install xcode command line tools run the above command again, this time it'll work.
 
 Make the scripts executable
 
