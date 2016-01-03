@@ -6,6 +6,11 @@ If you're a Linux user who never uses anything that is more than one step to ins
 
 Run this into your shell:
 
-    bash <($(command -v curl >/dev/null 2>&1 && echo "curl -sSL" || echo "wget -qO-") https://raw.githubusercontent.com/lbryio/lbry-setup/master/lbry_setup.sh)
+    bash <( \curl -sSL https://raw.githubusercontent.com/lbryio/lbry-setup/master/lbry_setup.sh )
+
+If you don't have `curl`, you can use `wget`
+
+    bash <( \wget -qO- https://raw.githubusercontent.com/lbryio/lbry-setup/master/lbry_setup.sh )
+
 
 If you want to customize the install directory, put `INSTALL_DIR="/path/to/dir" ` at the beginning of the above command. You can also change the `CONFIG_DIR` the same way if you want.
